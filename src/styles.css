@@ -43,6 +43,15 @@ header {
     position: relative;
 }
 
+/* #decoTop {
+    position: absolute;
+    top: -130px;
+    background-image: url(images/element-assets/element-asset-1.svg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 1150px;
+    height: 150px;
+} */
 
 #confirmCaption {
     position: absolute;
