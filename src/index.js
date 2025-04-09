@@ -1,3 +1,7 @@
 import './styles.css';
 
-console.log("Hello from the restaurant world!");
+import genHomePage from './home';
+
+document.addEventListener("DOMContentLoaded", () => {
+    genHomePage();
+});
