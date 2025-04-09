@@ -18,6 +18,32 @@ header {
     grid-area: 1 / 1 / 2 / 2;
 }
 
+header nav {
+    display: flex;
+    gap: 20px;
+}
+
+header button {
+    background: none;
+    border: 1px solid #20b2ab;
+    border-radius: 5px;
+    padding: 4px 10px;
+    color: white;
+    font-weight: 300;
+    font-style: italic;
+    text-shadow: 0px 0px 10px #20b2ab;
+}
+
+#background {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+    opacity: 0.09;
+    z-index: -1;
+}
+
 #content {
     grid-area: 2 / 1 / 3 / 2;
     display: grid;
@@ -30,6 +56,7 @@ header {
 #contentHead {
     grid-area: 1 / 1 / 2 / 2;
     color: white;
+    font-weight: 300;
 }
 
 #rect {
@@ -48,15 +75,33 @@ header {
     filter: drop-shadow(0px 3px 5px #20b2ab);
 }
 
-#confirmCaption {
+#confirmNotif {
+    display: flex;
     position: absolute;
     top: 50px;
+    gap: 10px;
+}
+
+#exclamation, #confirmCaption {
     color: white;
     font-weight: 600;
     text-shadow: 0px 0px 3px #20b2ab;
     border: 1px solid #20b2ab;
     border-radius: 5px;
     padding: 10px;
+}
+
+#exclamation {
+    padding: 10px 15px;
+}
+
+#printScanner img {
+    width: 150px;
+    height: 150px;
+}
+
+#printScanner:hover {
+    cursor: pointer;
 }
 
 #contentHead {
