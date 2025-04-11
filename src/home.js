@@ -30,36 +30,79 @@ function genHomePage() {
     confirmCaption.id = "confirmCaption";
     confirmCaption.textContent = "CONFIRM PLAYER IDENTITY"
     
+    // Thumbprint Scanner elements
     const printScanner = document.createElement("div");
     printScanner.id = "printScanner";
-
     const thumbScanner = document.createElement("img");
     thumbScanner.src = ThumbImage;
     thumbScanner.alt = "Thumbprint Scanner";
+    const progressContainer = document.createElement("div");
+    progressContainer.id = "progressContainer";
+    const progressBar = document.createElement("div");
+    progressBar.id = "progressBar";
+
+    // Thumbprint Scanner behavior
+
+    // Define progress bar variables
+    let startTime, animationFrame;
+    const HOLD_TIME = 3000;
+
+    function setProgress(percent) {
+        progressBar.style.width = `${percent * 100}%`;
+    }
+
     // Logic for click&hold behavior for Thumbprint Scanner
     let holdTimer;
     // Mousedown eventListener to trigger setTimeout()
     thumbScanner.addEventListener("mousedown", () => {
+        
+        // 1. setTimeout logic for callback behavior
         holdTimer = setTimeout(() => {
             console.log("Identity verified. Player shop is now available.");
             // Nav buttons made visible after identification confirmed
-            navButtons.forEach(button => button.style.background = "none");
+            navButtons.forEach(button => button.classList.add("faded"));
+            // set transition for font color on scan completion
+            navButtons.forEach(button => button.style.textShadow = "0px 0px 10px #20b2ab");
+            navButtons.forEach(button => button.style.transition = "color 1s ease, text-shadow 1s ease");
             navButtons.forEach(button => button.style.color = "rgba(255, 255, 255)");
-        }, 3000);
-    });
-    // Mouseup eventListener set to clear holdTimer on mouse up
-    thumbScanner.addEventListener("mouseup", () => {
-        clearTimeout(holdTimer);
+        }, HOLD_TIME);
+
+        // 2. progressBar fill behavior
+        progressBar.style.transition = "none";
+
+        startTime = performance.now();
+
+        function updateProgress(now) {
+            const elapsed = now - startTime;
+            const progress = Math.min(elapsed / HOLD_TIME, 1);
+            setProgress(progress);
+
+            if (progress < 1) {
+                animationFrame = requestAnimationFrame(updateProgress);
+            }
+        }
+
+        animationFrame = requestAnimationFrame(updateProgress);
     });
 
-    // Mouseleave eventListener set to clear holdTimer if mouse leaves scanner
-    thumbScanner.addEventListener("mouseleave", () => {
+    function resetProgress() {
         clearTimeout(holdTimer);
-    });
+        cancelAnimationFrame(animationFrame);
+        progressBar.style.transition = "width 0.3s ease";
+        setProgress(0);
+    }
+    // Mouseup eventListener set to clear holdTimer and reset progressBar on mouse up
+    thumbScanner.addEventListener("mouseup", resetProgress);
+
+    // Mouseleave eventListener set to clear holdTimer and reset progressBar if mouse leaves scanner
+    thumbScanner.addEventListener("mouseleave", resetProgress);
+
+
     
     confirmNotif.append(exclamation, confirmCaption);
     printScanner.append(thumbScanner);
-    rect.append(confirmNotif, printScanner);
+    progressContainer.append(progressBar);
+    rect.append(confirmNotif, printScanner, progressContainer);
     content.append(heading, rect);
 }
 
