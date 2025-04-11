@@ -118,6 +118,11 @@ header button {
     padding: 10px 15px;
 }
 
+#printScanner, #progressContainer, #confirmNotif {
+    transition: opacity 1s;
+}
+
+
 #printScanner img {
     width: 150px;
     height: 150px;
@@ -126,6 +131,7 @@ header button {
 #progressContainer {
     width: 150px;
     height: 10px;
+    margin-top: 20px;
 }
 
 #progressBar {

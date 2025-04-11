@@ -45,6 +45,8 @@ function genHomePage() {
 
     // Define progress bar variables
     let startTime, animationFrame;
+
+    // thumbscanner required hold time
     const HOLD_TIME = 3000;
 
     function setProgress(percent) {
@@ -65,6 +67,10 @@ function genHomePage() {
             navButtons.forEach(button => button.style.textShadow = "0px 0px 10px #20b2ab");
             navButtons.forEach(button => button.style.transition = "color 1s ease, text-shadow 1s ease");
             navButtons.forEach(button => button.style.color = "rgba(255, 255, 255)");
+            // adds fade out effect to the elements
+            printScanner.style.opacity = "0";
+            progressContainer.style.opacity = "0";
+            confirmNotif.style.opacity = "0";
         }, HOLD_TIME);
 
         // 2. progressBar fill behavior
@@ -84,6 +90,23 @@ function genHomePage() {
 
         animationFrame = requestAnimationFrame(updateProgress);
     });
+
+    // removes the thumbprint after the transition
+    printScanner.addEventListener("transitionend", () => {
+        printScanner.remove();
+    })
+
+    // removes the progressBar ONLY when the opacity is change, and not for any other transitions
+    progressContainer.addEventListener("transitionend", function handler(e) {
+        if (e.propertyName === "opacity") {
+            progressContainer.remove();
+        }
+    });
+
+    // remove notification on completion of scan
+    confirmNotif.addEventListener("transitionend", () => {
+        confirmNotif.remove();
+    })
 
     function resetProgress() {
         clearTimeout(holdTimer);
