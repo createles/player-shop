@@ -28,19 +28,33 @@ header button {
     border: 1px solid #20b2ab;
     border-radius: 5px;
     padding: 4px 10px;
-    color: white;
+    color: rgba(255, 255, 255, 0);
     font-weight: 300;
     font-style: italic;
-    text-shadow: 0px 0px 10px #20b2ab;
+    /* text-shadow: 0px 0px 10px #20b2ab; */
+    position: relative;
+    /* transition: color 1s ease; */
 }
 
-#home, #menu, #about {
-    background-image: url(images/glitch-big.gif);
+/* use ::before pseudo tags to simulate fade with background-image property */
+#home::before, #menu::before, #about::before {
+    content: "";
+    /* must set absolute position to place within element */
+    position: absolute;
+    background-image: url(images/item-glitch-2.gif);
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
+    /* inset sets the elements within the borders of container */
+    inset: 0;
+    opacity: 0.4;
+    transition: opacity 0.3s ease;
     /* RGB value loses alpha value on thumbprint completion */
-    color: rgba(255, 255, 255, 0)
+}
+
+/* add .faded class to each nav button to simulate background fade */
+#home.faded::before, #menu.faded::before, #about.faded::before {
+    opacity: 0;
 }
 
 #background {
@@ -107,6 +121,17 @@ header button {
 #printScanner img {
     width: 150px;
     height: 150px;
+}
+
+#progressContainer {
+    width: 150px;
+    height: 10px;
+}
+
+#progressBar {
+    width: 0%;
+    height: 100%;
+    background-color: #20b2ab;
 }
 
 #printScanner:hover {
