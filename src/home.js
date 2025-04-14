@@ -129,4 +129,21 @@ function genHomePage() {
     content.append(heading, rect);
 }
 
-export default genHomePage;
+function checkedHomePage() {
+    const content = document.querySelector("#content");
+    const heading = document.querySelector("#contentHead");
+    const rect = document.querySelector("#rect");
+
+    heading.textContent = "System Shop"
+    heading.style.animation = "none";
+
+    const welcomeMsg = document.createElement("div");
+    const shopDeals = document.createElement("div");
+
+    welcomeMsg.textContent = "Welcome to the Player Shop."
+    // shopDeals = 
+
+
+}
+
+export {genHomePage, checkedHomePage};

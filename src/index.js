@@ -1,6 +1,6 @@
 import './styles.css';
 
-import genHomePage from './home';
+import {genHomePage, checkedHomePage} from './home';
 
 document.addEventListener("DOMContentLoaded", () => {
     genHomePage();
