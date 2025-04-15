@@ -12,6 +12,7 @@ function genHomePage() {
     const heading = document.createElement("h1");
 
     heading.id = "contentHead";
+    heading.classList.add("glitched");
     heading.textContent = "System: Authentication Required";
     heading.title = "System: Authentication Required";
 
@@ -71,6 +72,7 @@ function genHomePage() {
             printScanner.style.opacity = "0";
             progressContainer.style.opacity = "0";
             confirmNotif.style.opacity = "0";
+            heading.style.opacity = "0";
         }, HOLD_TIME);
 
         // 2. progressBar fill behavior
@@ -96,7 +98,7 @@ function genHomePage() {
         printScanner.remove();
     })
 
-    // removes the progressBar ONLY when the opacity is change, and not for any other transitions
+    // removes the progressBar ONLY when the opacity is changed, and not for any other transitions
     progressContainer.addEventListener("transitionend", function handler(e) {
         if (e.propertyName === "opacity") {
             progressContainer.remove();
@@ -106,6 +108,7 @@ function genHomePage() {
     // remove notification on completion of scan
     confirmNotif.addEventListener("transitionend", () => {
         confirmNotif.remove();
+        checkedHomePage();
     })
 
     function resetProgress() {
@@ -133,17 +136,25 @@ function checkedHomePage() {
     const content = document.querySelector("#content");
     const heading = document.querySelector("#contentHead");
     const rect = document.querySelector("#rect");
-
-    heading.textContent = "System Shop"
-    heading.style.animation = "none";
-
     const welcomeMsg = document.createElement("div");
     const shopDeals = document.createElement("div");
 
+    heading.textContent = "System Shop"
+    heading.title = "none";
+    heading.classList.remove("glitched");
+    welcomeMsg.id ="welcomeMsg";
     welcomeMsg.textContent = "Welcome to the Player Shop."
+
+    void heading.offsetWidth;
+
+    // adds fade-in effect
+    heading.classList.add("fade-in");
+    welcomeMsg.classList.add("fade-in");
+
     // shopDeals = 
 
-
+    rect.append(welcomeMsg);
+    content.append(heading, rect);
 }
 
 export {genHomePage, checkedHomePage};
