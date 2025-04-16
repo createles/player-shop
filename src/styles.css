@@ -151,7 +151,26 @@ header button {
 
 #welcomeMsg {
     color: white;
-    font-size: larger;
+    font-size: 1rem;
+    position: absolute;
+    top: 50px;
+}
+
+#dealsContainer {
+    width: 80%;
+    height: 60%;
+    background-color: rgba(221, 29, 221, 0.253);
+    position: relative;
+}
+
+#dealsTitle {
+    color: white;
+    font-size: 1rem;
+}
+
+#setDeal {
+    width: 100%;
+    display: flex;
 }
 
 @keyframes glitch {
