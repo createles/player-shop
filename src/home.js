@@ -137,24 +137,78 @@ function checkedHomePage() {
     const heading = document.querySelector("#contentHead");
     const rect = document.querySelector("#rect");
     const welcomeMsg = document.createElement("div");
-    const shopDeals = document.createElement("div");
+    const dealsTitle = document.createElement("div");
+    const dealsContainer = document.createElement("div");
+    const setDeal = document.createElement("div");
 
     heading.textContent = "System Shop"
     heading.title = "none";
     heading.classList.remove("glitched");
     welcomeMsg.id ="welcomeMsg";
     welcomeMsg.textContent = "Welcome to the Player Shop."
+    dealsContainer.id = "dealsContainer";
+    dealsTitle.id = "dealsTitle";
+    dealsTitle.textContent = "Today's deals"
+    setDeal.id = "setDeal";
 
     void heading.offsetWidth;
 
     // adds fade-in effect
     heading.classList.add("fade-in");
     welcomeMsg.classList.add("fade-in");
+    dealsContainer.classList.add("fade-in");
+    dealsTitle.classList.add("fade-in");
 
     // shopDeals = 
 
-    rect.append(welcomeMsg);
+    dealsContainer.append(dealsTitle, setDeal);
+    rect.append(welcomeMsg, dealsContainer);
     content.append(heading, rect);
+
+    // call setDealComponents AFTER appending setDeal to the DOM
+    setDealComponents();
+}
+
+// function to import images from the images directory
+// r will be our CONTEXT for our images (meaning the scope of the image files included in the import)
+function importImages(r) {
+    // initialize empty object to house our images
+    let images = {};
+    // given a certain condition/context, populate our image-set object with the appropriate files
+    r.keys().forEach((key) => {
+        // must remove ./ added by webpack to the start of every file name
+        const cleanedKey = key.replace('./', '');
+        // populate our image-set object by setting the key and the value pairs
+        images[cleanedKey] = r(key);
+    });
+    return images; 
+}
+
+// Imports all our png images in the images/shop-items folder
+const images = importImages(require.context("./images/shop-items", false, /\.png$/));
+
+// Imports all the kargalgan set images into its own image-set object
+const kargSet = importImages(require.context("./images/shop-items", false, /^\.\/kargalgan.*\.png$/));
+
+function setDealComponents() {
+    const setDeal = document.querySelector("#setDeal");
+
+    const descBox = document.createElement("div");
+    const setName = document.createElement("p");
+    const setPrice = document.createElement("p");
+    
+    setName.textContent = "Almighty Kargalgan Set";
+    setName.classList.add("itemName");
+    setPrice.textContent = "3000 gems";
+    descBox.append(setName, setPrice);
+    setDeal.append(descBox);
+
+    for (let item in kargSet) {
+        const img = document.createElement('img');
+        img.src = images[item];
+        img.alt = item;
+        setDeal.append(img);
+    }
 }
 
 export {genHomePage, checkedHomePage};
