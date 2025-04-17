@@ -19,3 +19,6 @@ function clearTab() {
 
 buttons.forEach(button => button.addEventListener("click", clearTab));
 
+window.addEventListener("load", () => {
+    document.body.classList.remove("loading");
+});

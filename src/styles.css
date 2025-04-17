@@ -12,6 +12,21 @@ body {
     width: 100%;
     min-height: 100vh;
     background: linear-gradient(#040925, black);
+    /* the LOADED state; opacity is set to 1 to have body be visible */
+    opacity: 1;
+    transition: opacity 0.5s ease;
+}
+
+/* the BEFORE state; visibility is set to hidden so as to render elements but have them uninteractable and invisible */
+body.loading * {
+    visibility: hidden;
+}
+
+/* the BEFORE state; elements have 0 opacity to render them invisible,
+overflow set to hidden to disable scroll before items are visible */
+body.loading {
+    opacity: 0;
+    overflow: hidden;
 }
 
 header {
@@ -123,7 +138,6 @@ header button {
     transition: opacity 1s;
 }
 
-
 #printScanner img {
     width: 150px;
     height: 150px;
@@ -159,7 +173,6 @@ header button {
 #dealsContainer {
     width: 80%;
     height: 60%;
-    background-color: rgba(221, 29, 221, 0.253);
     position: relative;
 }
 
@@ -170,7 +183,20 @@ header button {
 
 #setDeal {
     width: 100%;
+    display: grid;
+    grid-template: 1fr / 1fr 1.5fr;
+}
+
+#setContainer {
+    justify-self: center;
+}
+
+#descBox {
+    height: 100%;
     display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 @keyframes glitch {
