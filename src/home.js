@@ -48,7 +48,7 @@ function genHomePage() {
     let startTime, animationFrame;
 
     // thumbscanner required hold time
-    const HOLD_TIME = 3000;
+    const HOLD_TIME = 1500;
 
     function setProgress(percent) {
         progressBar.style.width = `${percent * 100}%`;
@@ -194,20 +194,26 @@ function setDealComponents() {
     const setDeal = document.querySelector("#setDeal");
 
     const descBox = document.createElement("div");
+    descBox.id = "descBox";
     const setName = document.createElement("p");
     const setPrice = document.createElement("p");
     
     setName.textContent = "Almighty Kargalgan Set";
     setName.classList.add("itemName");
     setPrice.textContent = "3000 gems";
+    setPrice.classList.add("itemPrice");
     descBox.append(setName, setPrice);
     setDeal.append(descBox);
+
+    const setContainer = document.createElement("div");
+    setContainer.id = "setContainer";
+    setDeal.append(setContainer);
 
     for (let item in kargSet) {
         const img = document.createElement('img');
         img.src = images[item];
         img.alt = item;
-        setDeal.append(img);
+        setContainer.append(img);
     }
 }
 
