@@ -140,6 +140,7 @@ function checkedHomePage() {
     const dealsTitle = document.createElement("div");
     const dealsContainer = document.createElement("div");
     const setDeal = document.createElement("div");
+    const weaponDeals = document.createElement("div");
 
     heading.textContent = "System Shop"
     heading.title = "none";
@@ -150,6 +151,7 @@ function checkedHomePage() {
     dealsTitle.id = "dealsTitle";
     dealsTitle.textContent = "Today's deals"
     setDeal.id = "setDeal";
+    weaponDeals.id = "weaponDeals";
 
     void heading.offsetWidth;
 
@@ -161,12 +163,13 @@ function checkedHomePage() {
 
     // shopDeals = 
 
-    dealsContainer.append(dealsTitle, setDeal);
+    dealsContainer.append(dealsTitle, setDeal, weaponDeals);
     rect.append(welcomeMsg, dealsContainer);
     content.append(heading, rect);
 
     // call setDealComponents AFTER appending setDeal to the DOM
     setDealComponents();
+    weaponDealsComponents();
 }
 
 // function to import images from the images directory
@@ -185,7 +188,7 @@ function importImages(r) {
 }
 
 // Imports all our png images in the images/shop-items folder
-const images = importImages(require.context("./images/shop-items", false, /\.png$/));
+const saleWeapons = importImages(require.context("./images/shop-items/weapon-choices", false, /\.png$/));
 
 // Imports all the kargalgan set images into its own image-set object
 const kargSet = importImages(require.context("./images/shop-items", false, /^\.\/kargalgan.*\.png$/));
@@ -211,9 +214,47 @@ function setDealComponents() {
 
     for (let item in kargSet) {
         const img = document.createElement('img');
-        img.src = images[item];
+        img.src = kargSet[item];
         img.alt = item;
         setContainer.append(img);
+    }
+}
+
+function weaponDealsComponents() {
+    const weaponDeals = document.querySelector("#weaponDeals");
+    const descBoxWeapon = document.createElement("div");
+    descBoxWeapon.id = "descBoxWeapon";
+    const weaponDealName = document.createElement("p");
+    const weaponDealPrice = document.createElement("p");
+
+    weaponDealName.textContent = "Random S+ Rank Weapon";
+    weaponDealName.classList.add("itemName");
+    weaponDealPrice.textContent = "500 gems";
+    weaponDealPrice.classList.add("itemPrice");
+    descBoxWeapon.append(weaponDealName, weaponDealPrice);
+    weaponDeals.append(descBoxWeapon);
+
+    const weaponChoices = document.createElement("div");
+    weaponChoices.id = "weaponChoices";
+    weaponDeals.append(weaponChoices);
+
+    for (let weapon in saleWeapons) {
+        const img = document.createElement('img');
+        const weaponBox = document.createElement("div");
+        const weaponName = document.createElement("div");
+        weaponBox.id = "weaponBox";
+        weaponName.id = "weaponName";
+        weaponName.textContent = weapon
+        .replace(/\.[^/.]+$/, "")
+        .replace(/-/g, " ")
+        // capitalizes the first letter of every word
+        // by identifying word boundaries (\b) and a word character
+        // that follows (\w) and runs toUpperCase to it
+        .replace(/\b\w/g, c => c.toUpperCase()); 
+        img.src = saleWeapons[weapon];
+        img.alt = weapon;
+        weaponBox.append(img, weaponName);
+        weaponChoices.append(weaponBox);
     }
 }
 
