@@ -167,13 +167,21 @@ header button {
     color: white;
     font-size: 1rem;
     position: absolute;
-    top: 50px;
+    top: 35px;
 }
 
 #dealsContainer {
     width: 80%;
-    height: 60%;
+    height: 80%;
+    margin-top: 50px;
     position: relative;
+    overflow: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+#dealsContainer::-webkit-scrollbar {
+    display: none;
 }
 
 #dealsTitle {
@@ -192,11 +200,66 @@ header button {
 }
 
 #descBox {
-    height: 100%;
+    height: 80%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    background-color: #20b2ab3f;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+#weaponDeals {
+    width: 100%;
+    display: grid;
+    grid-template: 1fr / 1fr 1.5fr;
+    margin-top: 20px;
+    column-gap: 20px;;
+}
+
+#weaponDeals img {
+    width: 80%;
+    place-self: center;
+}
+
+#descBoxWeapon {
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #20b2ab3f;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+#weaponChoices {
+    display: flex;
+    width: 100%;
+}
+
+#weaponBox {
+    display: grid;
+    grid-template: 1fr 0.5fr / 1fr;
+    place-content: center;
+    gap: 5px;
+}
+
+#weaponName {
+    color: white;
+    place-content: center;
+    text-align: center;
+    font-size: 0.8rem;
+}
+
+.itemName {
+    color: white;
+}
+
+.itemPrice {
+    color: rgb(255, 58, 255);
+    text-shadow: 1px 1px 2px rgb(128, 9, 128);
 }
 
 @keyframes glitch {
