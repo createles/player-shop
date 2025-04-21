@@ -57,41 +57,47 @@ function genHomePage() {
     // Logic for click&hold behavior for Thumbprint Scanner
     let holdTimer;
     // Mousedown eventListener to trigger setTimeout()
-    thumbScanner.addEventListener("mousedown", () => {
+    thumbScanner.addEventListener("mousedown", verificationProcess);
+    thumbScanner.addEventListener("touchstart", e => {
+        e.preventDefault();
+        verificationProcess();
+});
+    // callback function for hold behavior;
+    function verificationProcess() {
+                // 1. setTimeout logic for callback behavior
+                holdTimer = setTimeout(() => {
+                    console.log("Identity verified. Player shop is now available.");
+                    // Nav buttons made visible after identification confirmed
+                    navButtons.forEach(button => button.classList.add("faded"));
+                    // set transition for font color on scan completion
+                    navButtons.forEach(button => button.style.textShadow = "0px 0px 10px #20b2ab");
+                    navButtons.forEach(button => button.style.transition = "color 1s ease, text-shadow 1s ease");
+                    navButtons.forEach(button => button.style.color = "rgba(255, 255, 255)");
+                    navButtons.forEach(button => button.style.cursor = "pointer");
+                    // adds fade out effect to the elements
+                    printScanner.style.opacity = "0";
+                    progressContainer.style.opacity = "0";
+                    confirmNotif.style.opacity = "0";
+                    heading.style.opacity = "0";
+                }, HOLD_TIME);
         
-        // 1. setTimeout logic for callback behavior
-        holdTimer = setTimeout(() => {
-            console.log("Identity verified. Player shop is now available.");
-            // Nav buttons made visible after identification confirmed
-            navButtons.forEach(button => button.classList.add("faded"));
-            // set transition for font color on scan completion
-            navButtons.forEach(button => button.style.textShadow = "0px 0px 10px #20b2ab");
-            navButtons.forEach(button => button.style.transition = "color 1s ease, text-shadow 1s ease");
-            navButtons.forEach(button => button.style.color = "rgba(255, 255, 255)");
-            // adds fade out effect to the elements
-            printScanner.style.opacity = "0";
-            progressContainer.style.opacity = "0";
-            confirmNotif.style.opacity = "0";
-            heading.style.opacity = "0";
-        }, HOLD_TIME);
-
-        // 2. progressBar fill behavior
-        progressBar.style.transition = "none";
-
-        startTime = performance.now();
-
-        function updateProgress(now) {
-            const elapsed = now - startTime;
-            const progress = Math.min(elapsed / HOLD_TIME, 1);
-            setProgress(progress);
-
-            if (progress < 1) {
+                // 2. progressBar fill behavior
+                progressBar.style.transition = "none";
+        
+                startTime = performance.now();
+        
+                function updateProgress(now) {
+                    const elapsed = now - startTime;
+                    const progress = Math.min(elapsed / HOLD_TIME, 1);
+                    setProgress(progress);
+        
+                    if (progress < 1) {
+                        animationFrame = requestAnimationFrame(updateProgress);
+                    }
+                }
+        
                 animationFrame = requestAnimationFrame(updateProgress);
             }
-        }
-
-        animationFrame = requestAnimationFrame(updateProgress);
-    });
 
     // removes the thumbprint after the transition
     printScanner.addEventListener("transitionend", () => {
@@ -123,7 +129,8 @@ function genHomePage() {
     // Mouseleave eventListener set to clear holdTimer and reset progressBar if mouse leaves scanner
     thumbScanner.addEventListener("mouseleave", resetProgress);
 
-
+    // handles touch input; when touch is released early, reset progress
+    thumbScanner.addEventListener("touchend", resetProgress);
     
     confirmNotif.append(exclamation, confirmCaption);
     printScanner.append(thumbScanner);
