@@ -1,6 +1,7 @@
 import './styles.css';
 
 import {genHomePage, checkedHomePage} from './home';
+import { genMenuPage } from './menu';
 
 document.addEventListener("DOMContentLoaded", () => {
     genHomePage();
@@ -18,6 +19,8 @@ function clearTab() {
 }
 
 buttons.forEach(button => button.addEventListener("click", clearTab));
+
+menu.addEventListener("click", genMenuPage);
 
 window.addEventListener("load", () => {
     document.body.classList.remove("loading");
