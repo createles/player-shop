@@ -376,6 +376,53 @@ img {
         flex-direction: column;
         align-items: center;
     }
+
+    #confirmNotif {
+        justify-content: center;
+        top: 15vh;
+        font-size: 0.8rem;
+        gap: 5px;
+    }
+
+    #rect {
+        width: 90%;
+        height: 90%;
+    }
+
+    #welcomeMsg {
+        font-size: 1rem;
+    }
+
+    #dealsContainer {
+        width: 70%;
+    }
+
+    #setDeal,
+    #weaponDeals {
+        display: grid;
+        grid-template-rows: auto 1fr; /* auto for desc, 1fr for items */
+        grid-template-columns: 1fr; /* Single column */
+        gap: 10px; /* Spacing between rows */
+    }
+
+    #descBox,
+    #descBoxWeapon {
+        flex-direction: column;
+        align-items: center;
+        height: 100%;
+    }
+
+    #setContainer {
+        justify-self: stretch;
+    }
+
+    #weaponChoices {
+        justify-content: center; /* Keep items centered */
+    }
+
+    #dealsTitle {
+        font-size: 2.5vh;
+    }
 }
 
 @media (min-width: 1920px) {
