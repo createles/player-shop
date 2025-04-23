@@ -265,4 +265,4 @@ function weaponDealsComponents() {
     }
 }
 
-export {genHomePage, checkedHomePage};
+export {genHomePage, checkedHomePage, importImages};
