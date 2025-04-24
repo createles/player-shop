@@ -10,7 +10,7 @@ body {
     grid-template: 1fr 8fr / 1fr;
     place-items: center;
     width: 100%;
-    min-height: 100vh;
+    height: 100vh;
     background: linear-gradient(#040925, black);
     opacity: 1;
     transition: opacity 0.5s ease;
@@ -283,9 +283,27 @@ header button {
     min-height: 0;
     max-height: 80%;
     display: grid;
-    grid-template: auto 1fr auto 1fr / 1fr 1fr;
     overflow-y: scroll;
     gap: 20px;
+    padding-right: 30px;
+}
+
+*::-webkit-scrollbar {
+    width: 10px;
+}
+
+*::-webkit-scrollbar-track {
+    background: none;
+    border: 1px solid #20b2ab;
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: #20b2ab;
+    border-radius: 5px;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+    background-color: #00fff2;
 }
 
 .itemBox {
@@ -343,6 +361,7 @@ header button {
 #keyWrap {
     display: grid;
     grid-template: auto / 2fr 1fr;
+    padding-right: 0;
 }
 
 #keyWrap > .itemBox {
@@ -363,9 +382,22 @@ header button {
 
 .wrapper {
     width: 70%;
-    height: 70%;
+    height: 50%;
     row-gap: 30px;
     column-gap: 20px;
+    padding-right: 30px;
+}
+
+#aboutTxt, #attrib {
+    color: white;
+}
+
+#attrib {
+    margin-top: 50px;
+    font-size: 0.7rem;
+    font-style: italic;
+    position: absolute;
+    bottom: 50px;
 }
 
 img {
@@ -519,7 +551,52 @@ img {
     }
 
     #consumablesCont {
+        width: 75%;
+        display: flex;
+        max-height: 80%;
+        flex-direction: column;
+        padding-right: 0px;
+        
+    }
+
+    .menuBox {
+        min-height: 200px;
+    }
+
+    .wrapper {
+        padding-right: 0px;
+        height: 60%;
+    }
+
+    *::-webkit-scrollbar {
+        display: none;
+    }
+
+    #manaWrap, #timeWrap {
+        padding: 30px 0px;
+    }
+
+    .itemName {
+        font-size: 0.8rem;
+    }
+
+    #keyDesc, #manaDesc, #timeDesc {
+        text-align: center;
+    }
+    
+    #aboutDesc {
+        display: flex;
+        justify-content: center;
+    }
+    
+    #aboutTxt {
+        line-height: 44px;
+        font-size: 30px;
+    }
+
+    #aboutTxt, #attrib {
         width: 70%;
+        text-align: center;
     }
 }
 
