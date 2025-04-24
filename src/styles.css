@@ -490,6 +490,10 @@ img {
 
 @media (max-width: 768px) {
 
+    body {
+        height: 100svh;
+    }
+
     h1,
     #welcomeMsg,
     #dealsTitle {
