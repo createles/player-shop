@@ -8,14 +8,15 @@ function genMenuPage() {
     const content = document.querySelector("#content");
     const contentHead = document.createElement("h1");
     contentHead.id = "contentHead";
+    contentHead.classList.add("fade-in");
     contentHead.textContent = "Shop Menu";
 
     const rect = document.createElement("div");
     rect.id = "rect";
-    rect.classList.add("fade-in");
 
     const consumables = document.createElement("div");
     consumables.id = "consumablesCont";
+    consumables.classList.add("fade-in");
 
     const keyCont = document.createElement("div");
     const keyWrap = document.createElement("div");
